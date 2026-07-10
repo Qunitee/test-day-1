@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react';
 
-export interface TabProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface UiTabItemProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
   icon?: React.ReactNode;
   isPinned?: boolean;
