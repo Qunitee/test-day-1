@@ -1,41 +1,11 @@
 'use client';
 import { UiTabItem } from '@/src/ui/ui-tab/ui-tab-item/ui-tab-item';
-import { BarChartIcon, Settings } from 'lucide-react';
 import { useState } from 'react';
+import { UiTabBar } from '@/src/ui/ui-tab/ui-tab-bar/ui-tab-bar';
+import { TabsData } from '@/app/entities/tab-bar/tabs-array';
 
 export default function Home() {
-  const [tabs, setTabs] = useState([
-    {
-      id: '1',
-      title: 'Overview',
-      url: '/overview',
-      isPinned: false,
-      isActive: true,
-    },
-    {
-      id: '2',
-      title: 'Analytics',
-      url: '/analytics',
-      isPinned: false,
-      isActive: false,
-      icon: <BarChartIcon size={16} />,
-    },
-    {
-      id: '3',
-      title: 'Reports',
-      url: '/reports',
-      isPinned: false,
-      isActive: false,
-    },
-    {
-      id: '4',
-      title: 'Settings',
-      url: '/settings',
-      isPinned: true,
-      isActive: false,
-      icon: <Settings />,
-    },
-  ]);
+  const [tabs, setTabs] = useState(TabsData);
 
   const handleTabClick = (id: string) => {
     setTabs(prev =>
@@ -52,8 +22,8 @@ export default function Home() {
   ];
 
   return (
-    <div>
-      <main>
+    <div className="py-2 w-1/2">
+      <UiTabBar className="h-12">
         {sortedTabs.map(tab => (
           <UiTabItem
             key={tab.id}
@@ -63,12 +33,12 @@ export default function Home() {
             isActive={tab.isActive}
             url={tab.url}
             onClick={() => {
-              handleTabClick(tab.id);
+              handleTabClick(tab.id!);
               console.log('1');
             }}
           />
         ))}
-      </main>
+      </UiTabBar>
     </div>
   );
 }
