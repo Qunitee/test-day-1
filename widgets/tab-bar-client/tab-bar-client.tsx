@@ -1,19 +1,23 @@
 'use client';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { DraggableTabBar } from '@/src/components/drag-and-drop/draggable-tab-bar/draggable-tab-bar';
-import { TabDropdown } from '@/entities/tab-bar/components/tab-bar-dropdown/tab-bar-dropdown';
-import { useTabsStore } from '@/src/store/tabs-store/pinned-tabs.store';
-import { TabsData } from '@/entities/tab-bar/tabs-array';
-import { useHiddenTabs } from '@/src/hooks/use-hidden-tabs.hook';
+
+import {useCallback, useEffect, useRef, useState} from 'react';
+import {usePathname, useRouter} from 'next/navigation';
+import {DraggableTabBar} from '@/src/components/drag-and-drop/draggable-tab-bar/draggable-tab-bar';
+import {TabDropdown} from '@/entities/tab-bar/components/tab-bar-dropdown/tab-bar-dropdown';
+import {useTabsStore} from '@/src/store/tabs-store/pinned-tabs.store';
+import {TabsData} from '@/entities/tab-bar/tabs-array';
+import {useHiddenTabs} from '@/src/hooks/use-hidden-tabs.hook';
 
 export default function TabBarClient() {
-  const [activeId, setActiveId] = useState<string | null>(
-    () => TabsData.find(t => t.isActive)?.id ?? null
-  );
+  const pathname = usePathname();
+  const router = useRouter();
   const [pinnedWidth, setPinnedWidth] = useState(0);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const { pinnedIds, orderedIds, togglePin, reorder } = useTabsStore();
+
+  const currentActiveTab = TabsData.find(t => t.url === pathname);
+  const activeId = currentActiveTab?.id ?? null;
 
   const ordered = orderedIds
     .map(id => TabsData.find(t => t.id === id))
@@ -53,8 +57,15 @@ export default function TabBarClient() {
     .filter(t => hiddenIds.includes(t.id!))
     .map(t => ({ id: t.id!, title: t.title, icon: t.icon }));
 
+  const handleTabClick = (id: string) => {
+    const targetTab = TabsData.find(t => t.id === id);
+    if (targetTab?.url) {
+      router.push(targetTab.url);
+    }
+  };
+
   const goToTab = (id: string) => {
-    setActiveId(id);
+    handleTabClick(id);
     scrollRef.current
       ?.querySelector<HTMLElement>(`[data-tab-id="${id}"]`)
       ?.scrollIntoView({
@@ -70,7 +81,7 @@ export default function TabBarClient() {
         <DraggableTabBar
           tabs={sortedTabs}
           containerRef={setScrollRef}
-          onTabClick={setActiveId}
+          onTabClick={handleTabClick}
           onTogglePin={togglePin}
           onReorder={reorder}
         />

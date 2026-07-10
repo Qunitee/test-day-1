@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
 import { TooltipProvider } from '@/src/ui/ui-tooltip/tooltip';
+import TabBarClient from '@/widgets/tab-bar-client/tab-bar-client';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -21,8 +22,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col">
-        <TooltipProvider>{children}</TooltipProvider>
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        <TooltipProvider>
+          <header className="w-full px-4 border-b border-border bg-card">
+            <TabBarClient />
+          </header>
+
+          <main className="flex-1 w-full p-4">{children}</main>
+        </TooltipProvider>
       </body>
     </html>
   );
