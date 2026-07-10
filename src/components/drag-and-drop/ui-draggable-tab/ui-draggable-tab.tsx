@@ -1,14 +1,11 @@
-import { UiDraggableTabProps } from '@/src/ui/ui-tab/ui-draggable-tab/ui-draggable-tab-props';
+
 import { useSortable } from '@dnd-kit/sortable';
 import clsx from 'clsx';
 import { UiTabItem } from '@/src/ui/ui-tab/ui-tab-item/ui-tab-item';
 import { CSS } from '@dnd-kit/utilities';
+import { UiDraggableTabProps } from './ui-draggable-tab-props';
 
-export function UiDraggableTab({
-  id,
-  isPinned,
-  ...tabProps
-}: UiDraggableTabProps) {
+export function UiDraggableTab({ id, isPinned, ...tabProps }: UiDraggableTabProps) {
   const {
     attributes,
     listeners,

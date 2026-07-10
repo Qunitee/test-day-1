@@ -19,7 +19,7 @@ export const TabsData: TabBarItem[] = [
     id: '1',
     title: 'Dashboard',
     url: '/dashboard',
-    isPinned: true,
+    isPinned: false,
     isActive: true,
     icon: <LayoutDashboard />,
   },

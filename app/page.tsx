@@ -9,7 +9,7 @@ const TabBarClient = dynamic(
 
 export default function Home() {
   return (
-    <div className="py-2 w-full">
+    <div className="py-2 w-full flex item-center">
       <TabBarClient />
     </div>
   );

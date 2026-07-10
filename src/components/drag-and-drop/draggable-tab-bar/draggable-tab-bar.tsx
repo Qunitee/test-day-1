@@ -12,9 +12,10 @@ import {
   SortableContext,
 } from '@dnd-kit/sortable';
 import { restrictToHorizontalAxis } from '@dnd-kit/modifiers';
-import { UiDraggableTab } from '@/src/ui/ui-tab/ui-draggable-tab/ui-draggable-tab';
+
 import { UiTabBar } from '@/src/ui/ui-tab/ui-tab-bar/ui-tab-bar';
-import { DraggableTabBarProps } from '@/entities/tab-bar/components/tab-bar/draggable-tab-bar-props';
+import { DraggableTabBarProps } from '@/src/components/drag-and-drop/draggable-tab-bar/draggable-tab-bar-props';
+import { UiDraggableTab } from '@/src/components/drag-and-drop/ui-draggable-tab/ui-draggable-tab';
 
 export function DraggableTabBar({
   tabs,

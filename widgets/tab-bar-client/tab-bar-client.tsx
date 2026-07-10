@@ -1,6 +1,6 @@
 'use client';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { DraggableTabBar } from '@/entities/tab-bar/components/tab-bar/draggable-tab-bar';
+import { DraggableTabBar } from '@/src/components/drag-and-drop/draggable-tab-bar/draggable-tab-bar';
 import { TabDropdown } from '@/entities/tab-bar/components/tab-bar-dropdown/tab-bar-dropdown';
 import { useTabsStore } from '@/src/store/tabs-store/pinned-tabs.store';
 import { TabsData } from '@/entities/tab-bar/tabs-array';
@@ -33,7 +33,6 @@ export default function TabBarClient() {
     scrollRef.current = el;
   }, []);
 
-  // Ширина закреплённой (sticky) области — точка отсчёта для детекции скрытых вкладок.
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -58,11 +57,15 @@ export default function TabBarClient() {
     setActiveId(id);
     scrollRef.current
       ?.querySelector<HTMLElement>(`[data-tab-id="${id}"]`)
-      ?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      ?.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest',
+      });
   };
 
   return (
-    <div className="py-2 w-1/2">
+    <div className="py-2 w-full">
       <div className="relative flex items-center gap-2">
         <DraggableTabBar
           tabs={sortedTabs}
