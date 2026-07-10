@@ -4,8 +4,13 @@ import './tab-bar.css';
 import { useRef } from 'react';
 import { ScrollSpeedCoeff } from '@/src/constants/scroll-speed-coeff';
 
-export function UiTabBar({ children, className }: UiTabBarProps) {
+export function UiTabBar({ children, className, containerRef }: UiTabBarProps) {
   const ref = useRef<HTMLDivElement>(null);
+
+  const setRef = (el: HTMLDivElement | null) => {
+    ref.current = el;
+    containerRef?.(el);
+  };
 
   const handleWheel = (e: React.WheelEvent) => {
     if (e.deltaY === 0) return;
@@ -19,7 +24,7 @@ export function UiTabBar({ children, className }: UiTabBarProps) {
   );
 
   return (
-    <div ref={ref} className={classes} onWheel={handleWheel}>
+    <div ref={setRef} className={classes} onWheel={handleWheel}>
       {children}
     </div>
   );
