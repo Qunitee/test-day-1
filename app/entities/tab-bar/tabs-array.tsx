@@ -1,4 +1,3 @@
-import { UiTabItemProps } from '@/src/ui/ui-tab/ui-tab-item/ui-tab-props';
 import {
   BarChart3,
   Calculator,
@@ -13,8 +12,9 @@ import {
   ShoppingBag,
   ShoppingCart,
 } from 'lucide-react';
+import { TabBarItem } from '@/app/entities/tab-bar/tab-bar-item';
 
-export const TabsData: UiTabItemProps[] = [
+export const TabsData: TabBarItem[] = [
   {
     id: '1',
     title: 'Dashboard',

@@ -34,7 +34,6 @@ export default function Home() {
             url={tab.url}
             onClick={() => {
               handleTabClick(tab.id!);
-              console.log('1');
             }}
           />
         ))}
