@@ -1,49 +1,16 @@
 'use client';
-import {UiTabItem} from '@/src/ui/ui-tab/ui-tab-item/ui-tab-item';
-import {useState} from 'react';
-import {UiTabBar} from '@/src/ui/ui-tab/ui-tab-bar/ui-tab-bar';
-import {TabsData} from '@/app/entities/tab-bar/tabs-array';
+
+import dynamic from 'next/dynamic';
+
+const TabBarClient = dynamic(
+  () => import('../app/entities/tab-bar/tab-bar-client'),
+  { ssr: false }
+);
 
 export default function Home() {
-  const [tabs, setTabs] = useState(TabsData);
-
-  const handleTabClick = (id: string) => {
-    setTabs(prev =>
-      prev.map(tab => ({
-        ...tab,
-        isActive: tab.id === id,
-      }))
-    );
-  };
-
-  const sortedTabs = [
-    ...tabs.filter(t => t.isPinned),
-    ...tabs.filter(t => !t.isPinned),
-  ];
-
-  const togglePin = (id: string) => {
-    setTabs(prev =>
-      prev.map(t => (t.id === id ? { ...t, isPinned: !t.isPinned } : t))
-    );
-  };
-
   return (
-    <div className="py-2 w-1/2">
-      <UiTabBar className="h-12">
-        {sortedTabs.map(tab => (
-          <UiTabItem
-            key={tab.id}
-            title={tab.title}
-            icon={tab.icon}
-            isPinned={tab.isPinned}
-            isActive={tab.isActive}
-            onClick={() => {
-              handleTabClick(tab.id!);
-            }}
-            onTogglePin={() => togglePin(tab.id!)}
-          />
-        ))}
-      </UiTabBar>
+    <div className="py-2 w-full">
+      <TabBarClient />
     </div>
   );
 }
