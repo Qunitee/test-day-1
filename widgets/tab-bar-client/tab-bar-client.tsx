@@ -1,12 +1,12 @@
 'use client';
 
-import {useCallback, useEffect, useRef, useState} from 'react';
-import {usePathname, useRouter} from 'next/navigation';
-import {DraggableTabBar} from '@/src/components/drag-and-drop/draggable-tab-bar/draggable-tab-bar';
-import {TabDropdown} from '@/entities/tab-bar/components/tab-bar-dropdown/tab-bar-dropdown';
-import {useTabsStore} from '@/src/store/tabs-store/pinned-tabs.store';
-import {TabsData} from '@/entities/tab-bar/tabs-array';
-import {useHiddenTabs} from '@/src/hooks/use-hidden-tabs.hook';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { DraggableTabBar } from '@/src/components/drag-and-drop/draggable-tab-bar/draggable-tab-bar';
+import { TabDropdown } from '@/entities/tab-bar/components/tab-bar-dropdown/tab-bar-dropdown';
+import { useTabsStore } from '@/src/store/tabs-store/pinned-tabs.store';
+import { TabsData } from '@/entities/tab-bar/tabs-array';
+import { useHiddenTabs } from '@/src/hooks/use-hidden-tabs.hook';
 
 export default function TabBarClient() {
   const pathname = usePathname();
@@ -76,8 +76,8 @@ export default function TabBarClient() {
   };
 
   return (
-    <div className="py-2 w-full">
-      <div className="relative flex items-center gap-2">
+    <div className="py-2 w-3/5">
+      <div className="relative flex items-center gap-2 w-1/2">
         <DraggableTabBar
           tabs={sortedTabs}
           containerRef={setScrollRef}
