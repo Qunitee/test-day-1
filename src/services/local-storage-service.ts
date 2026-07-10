@@ -22,6 +22,7 @@ export class LocalStorageService {
   }
 
   removeItem(token: string): void {
+    if (typeof window === 'undefined') return;
     localStorage.removeItem(this.key(token));
   }
 }
