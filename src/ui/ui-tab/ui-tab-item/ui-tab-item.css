@@ -2,6 +2,7 @@
     border-top: 2px solid #ededed;
     background: white;
     box-sizing: border-box;
+    color: #818181;
 }
 
 .tab-item svg {
@@ -12,13 +13,15 @@
 
 .tab-item:hover {
     cursor: pointer;
-    background-color: #F1F5F9;
+    color: #222121;
     border-top: 2px solid gray;
+    background-color: #F1F5F9;
 }
 
 .tab-active {
     background-color: #F1F5F9;
     border-top: 2px solid #84c2ff;
+    color: #222121;
 }
 
 .tab-active:hover {

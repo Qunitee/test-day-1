@@ -1,8 +1,8 @@
 'use client';
-import { UiTabItem } from '@/src/ui/ui-tab/ui-tab-item/ui-tab-item';
-import { useState } from 'react';
-import { UiTabBar } from '@/src/ui/ui-tab/ui-tab-bar/ui-tab-bar';
-import { TabsData } from '@/app/entities/tab-bar/tabs-array';
+import {UiTabItem} from '@/src/ui/ui-tab/ui-tab-item/ui-tab-item';
+import {useState} from 'react';
+import {UiTabBar} from '@/src/ui/ui-tab/ui-tab-bar/ui-tab-bar';
+import {TabsData} from '@/app/entities/tab-bar/tabs-array';
 
 export default function Home() {
   const [tabs, setTabs] = useState(TabsData);
@@ -31,7 +31,6 @@ export default function Home() {
             icon={tab.icon}
             isPinned={tab.isPinned}
             isActive={tab.isActive}
-            url={tab.url}
             onClick={() => {
               handleTabClick(tab.id!);
             }}
