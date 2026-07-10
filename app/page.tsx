@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 
 const TabBarClient = dynamic(
-  () => import('../app/entities/tab-bar/tab-bar-client'),
+  () => import('../entities/tab-bar/tab-bar-client'),
   { ssr: false }
 );
 
