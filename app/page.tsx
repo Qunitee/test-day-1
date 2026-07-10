@@ -21,6 +21,12 @@ export default function Home() {
     ...tabs.filter(t => !t.isPinned),
   ];
 
+  const togglePin = (id: string) => {
+    setTabs(prev =>
+      prev.map(t => (t.id === id ? { ...t, isPinned: !t.isPinned } : t))
+    );
+  };
+
   return (
     <div className="py-2 w-1/2">
       <UiTabBar className="h-12">
@@ -34,6 +40,7 @@ export default function Home() {
             onClick={() => {
               handleTabClick(tab.id!);
             }}
+            onTogglePin={() => togglePin(tab.id!)}
           />
         ))}
       </UiTabBar>

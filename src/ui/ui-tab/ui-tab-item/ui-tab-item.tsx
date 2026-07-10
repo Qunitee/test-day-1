@@ -3,6 +3,13 @@ import './ui-tab-item.css';
 
 import { UiTabItemProps } from '@/src/ui/ui-tab/ui-tab-item/ui-tab-props';
 import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from '@/src/ui/ui-context-menu/context-menu';
+import { Pin, PinOff } from 'lucide-react';
+import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
@@ -13,6 +20,7 @@ export function UiTabItem({
   icon,
   isPinned = false,
   isActive = false,
+  onTogglePin,
   className,
   ...props
 }: UiTabItemProps) {
@@ -30,11 +38,23 @@ export function UiTabItem({
     </button>
   );
 
-  if (!isPinned) return button;
+  const withMenu = (
+    <ContextMenu>
+      <ContextMenuTrigger render={button} />
+      <ContextMenuContent>
+        <ContextMenuItem onClick={onTogglePin}>
+          {isPinned ? <PinOff /> : <Pin />}
+          {isPinned ? 'Tab loslösen' : 'Tab anpinnen'}
+        </ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
+  );
+
+  if (!isPinned) return withMenu;
 
   return (
     <Tooltip>
-      <TooltipTrigger render={button} />
+      <TooltipTrigger render={withMenu} />
       <TooltipContent side="bottom" className="flex items-center gap-2">
         {icon}
         {title}

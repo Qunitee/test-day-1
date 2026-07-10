@@ -6,4 +6,5 @@ export interface UiTabItemProps extends ButtonHTMLAttributes<HTMLButtonElement> 
   isPinned?: boolean;
   isActive?: boolean;
   className?: string;
+  onTogglePin?: () => void;
 }
