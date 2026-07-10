@@ -24,7 +24,7 @@ export default function TabBarClient() {
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
-      activationConstraint: { distance: 5 }, // чтобы клик не считался перетаскиванием
+      activationConstraint: { distance: 5 },
     })
   );
 
