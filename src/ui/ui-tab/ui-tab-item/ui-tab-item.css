@@ -1,0 +1,26 @@
+.tab-item {
+    border-top: 2px solid #ededed;
+    background: white;
+    box-sizing: border-box;
+}
+
+.tab-item:hover {
+    cursor: pointer;
+    background-color: #F1F5F9;
+    border-top: 2px solid gray;
+}
+
+.tab-active {
+    background-color: #F1F5F9;
+    border-top: 2px solid #84c2ff;
+}
+
+.tab-active:hover {
+    cursor: pointer;
+    background-color: #F1F5F9;
+    border-top: 2px solid #84c2ff;
+}
+
+.tab-pinned {
+    max-width: 3rem;
+}
