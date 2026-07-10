@@ -2,20 +2,21 @@
 import { useState } from 'react';
 import { UiTabItem } from '@/src/ui/ui-tab/ui-tab-item/ui-tab-item';
 import { UiTabBar } from '@/src/ui/ui-tab/ui-tab-bar/ui-tab-bar';
-import { TabsData } from '@/app/entities/tab-bar/tabs-array';
-import { usePinnedTabs } from '@/src/store/pinned-tabs.store';
+import { useTabsStore } from '@/src/store/tabs-store/pinned-tabs.store';
+import { TabsData } from '@/entities/tab-bar/tabs-array';
 
 export default function TabBarClient() {
-  const [tabs, setTabs] = useState(TabsData);
-  const { pinnedIds, togglePin } = usePinnedTabs();
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const { pinnedIds, orderedIds, togglePin } = useTabsStore();
 
-  const handleTabClick = (id: string) => {
-    setTabs(prev => prev.map(tab => ({ ...tab, isActive: tab.id === id })));
-  };
+  const ordered = orderedIds
+    .map(id => TabsData.find(t => t.id === id))
+    .filter(Boolean) as typeof TabsData;
 
-  const withPinned = tabs.map(t => ({
+  const withPinned = ordered.map(t => ({
     ...t,
     isPinned: pinnedIds.includes(t.id!),
+    isActive: t.id === activeId,
   }));
 
   const sortedTabs = [
@@ -33,7 +34,7 @@ export default function TabBarClient() {
             icon={tab.icon}
             isPinned={tab.isPinned}
             isActive={tab.isActive}
-            onClick={() => handleTabClick(tab.id!)}
+            onClick={() => setActiveId(tab.id!)}
             onTogglePin={() => togglePin(tab.id!)}
           />
         ))}

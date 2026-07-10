@@ -12,7 +12,7 @@ import {
   ShoppingBag,
   ShoppingCart,
 } from 'lucide-react';
-import { TabBarItem } from '@/app/entities/tab-bar/tab-bar-item';
+import { TabBarItem } from '@/entities/tab-bar/tab-bar-item';
 
 export const TabsData: TabBarItem[] = [
   {
