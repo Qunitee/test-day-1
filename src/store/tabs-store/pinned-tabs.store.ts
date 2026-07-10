@@ -9,9 +9,17 @@ const OrderKey = 'order';
 
 const defaultOrder = TabsData.map(t => t.id!);
 
+const storedOrder = localStorageService.getItem<string[]>(OrderKey);
+const reconciledOrder = storedOrder
+  ? [
+      ...storedOrder.filter(id => defaultOrder.includes(id)),
+      ...defaultOrder.filter(id => !storedOrder.includes(id)),
+    ]
+  : defaultOrder;
+
 export const useTabsStore = create<TabsState>((set, get) => ({
   pinnedIds: localStorageService.getItem<string[]>(PinnedKey) ?? [],
-  orderedIds: localStorageService.getItem<string[]>(OrderKey) ?? defaultOrder,
+  orderedIds: reconciledOrder,
 
   togglePin: id => {
     const current = get().pinnedIds;
@@ -26,6 +34,7 @@ export const useTabsStore = create<TabsState>((set, get) => ({
     const ids = [...get().orderedIds];
     const from = ids.indexOf(activeId);
     const to = ids.indexOf(overId);
+    if (from === -1 || to === -1) return;
     ids.splice(to, 0, ids.splice(from, 1)[0]);
     set({ orderedIds: ids });
     localStorageService.setItem(OrderKey, ids);

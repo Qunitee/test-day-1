@@ -19,7 +19,9 @@ import { TabsData } from '@/entities/tab-bar/tabs-array';
 import { UiDraggableTab } from '@/src/ui/ui-tab/ui-draggable-tab/ui-draggable-tab';
 
 export default function TabBarClient() {
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(
+    () => TabsData.find(t => t.isActive)?.id ?? null
+  );
   const { pinnedIds, orderedIds, togglePin, reorder } = useTabsStore();
 
   const sensors = useSensors(
@@ -59,7 +61,7 @@ export default function TabBarClient() {
         modifiers={[restrictToHorizontalAxis]}
       >
         <SortableContext
-          items={sortedTabs.map(t => t.id!)}
+          items={sortedTabs.filter(t => !t.isPinned).map(t => t.id!)}
           strategy={horizontalListSortingStrategy}
         >
           <UiTabBar className="h-12">

@@ -16,7 +16,7 @@ export function UiDraggableTab({
     transform,
     transition,
     isDragging,
-  } = useSortable({ id });
+  } = useSortable({ id, disabled: isPinned });
 
   const style = {
     transform: CSS.Transform.toString(transform),
