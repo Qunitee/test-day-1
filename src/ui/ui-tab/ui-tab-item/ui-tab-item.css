@@ -28,7 +28,7 @@
 }
 
 .tab-pinned {
-    max-width: 3rem;
+    width: 3rem;
     padding-left: 0;
     padding-right: 0;
 }
