@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import { TooltipProvider } from '@/src/ui/ui-tooltip/tooltip';
-import TabBarClient from '@/widgets/tab-bar-client/tab-bar-client';
+import { TooltipProvider } from '@/src/shared/ui/ui-tooltip/tooltip';
+import TabBarClient from '@/src/widgets/tab-bar-client/tab-bar-client';
 
 const poppins = Poppins({
   subsets: ['latin'],
